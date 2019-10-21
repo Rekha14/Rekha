@@ -1,0 +1,10 @@
+'Program to check if the given string is a Palindrome or not
+
+MyStr=Ucase(inputbox("Enter the String:"))
+RevStr=strreverse(MyStr)
+
+if strcomp(MyStr,RevStr)=0 then
+   msgbox "It is a Palindrome"
+else
+   msgbox "It is not a Palindrome"
+end if
