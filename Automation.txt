@@ -1,0 +1,54 @@
+
+systemutil.Run "http://the-internet.herokuapp.com/"
+
+If Browser("The Internet").Page("The Internet").Link("JavaScript Alerts").Exist Then
+
+                Browser("The Internet").Page("The Internet").Link("JavaScript Alerts").Click
+
+                Reporter.ReportEvent micPass,"URL access Passed","URL did launch the page"
+
+                If Browser("The Internet").Page("The Internet").WebButton("Click for JS Confirm").Exist Then
+
+                                Browser("The Internet").Page("The Internet").WebButton("Click for JS Confirm").Click
+
+                                Reporter.ReportEvent micPass,"Click for JS Confirm exists","Click for JS Confirm button exists"
+
+                                If Browser("The Internet").Dialog("Message from webpage").Exist Then
+
+                                                Browser("The Internet").Dialog("Message from webpage").WinButton("OK").Click
+
+                                                Reporter.ReportEvent micPass,"Promt does exists","Webpage promt does exists"                                         
+
+                                                If Browser("The Internet").Webelement("You clicked: Ok").Exist Then
+
+                                                                Reporter.ReportEvent micPass,"Clicked on YES","Clicked on YES sucessfully"      
+
+                                                Else
+
+                                                                Reporter.ReportEvent micFail,"Clicked on YES failed","Clicked on YES NOT sucessfull"               
+
+                                                End if
+
+                                                SystemUtil.CloseProcessByName "iexplore.exe"
+
+ 
+
+                                Else
+
+                                                Reporter.ReportEvent micFail,"Promt does not exists","Webpage promt does not exists"
+
+                                End if
+
+                Else
+
+                                Reporter.ReportEvent micFail,"Click for JS Confirm doest not exists","Click for JS Confirm button does not exists"
+
+                End If
+
+Else
+
+                Reporter.ReportEvent micFail,"URL access Failed","URL did not launch the page"
+
+               
+
+End If
